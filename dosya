@@ -1,0 +1,166 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define ANSI_COLOR_RED      "\033[31m"
+#define ANSI_COLOR_GREEN    "\033[32m"
+#define ANSI_COLOR_RESET    "\033[0m"
+
+int main(int argc, char *argv[])
+{
+    int x, y;
+    int input_status;
+    int result = 0;
+
+    do {
+        printf("\nO-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O-O\n");
+
+        // --- Birinci Say� Girdisi ---
+        do {
+            printf("Please enter the first number " ANSI_COLOR_RED "between 0 to 9" ANSI_COLOR_RESET " = ");   // ilk input girdisi i�in text
+            input_status = scanf("%d", &x);   //x i�in tam say� tan�mlamas�
+            if (input_status != 1) {   //istenilen de�er aral��� i�in do�ruluk girdisi
+                printf(ANSI_COLOR_RED "Please enter a valid single digit number\n" ANSI_COLOR_RESET);  //hatal� girdi durumunda ��kacak text
+                while (getchar() != '\n');    // Ko�ul girdisi temizleme kodu 
+            }
+            else if (x < 0 || x > 9) {   
+                printf(ANSI_COLOR_RED "Enter a number between 0 to 9\n" ANSI_COLOR_RESET);
+            }
+        } while (input_status != 1 || x < 0 || x > 9);
+
+        // --- �kinci Say� Girdisi ---
+        do {
+            printf("Please enter the second number " ANSI_COLOR_RED "between 0 to 9" ANSI_COLOR_RESET " = ");  //ikinci input girdisi i�in text
+            input_status = scanf("%d", &y);   //y i�in tam say� tan�mlamas�
+            if (input_status != 1) {  
+                printf(ANSI_COLOR_RED "Please enter a valid single digit number\n" ANSI_COLOR_RESET);
+                while (getchar() != '\n');  // Ko�ul girdisi 
+            }
+            else if (y < 0 || y > 9) {
+                printf(ANSI_COLOR_RED "Number has to be single digit. Please try again\n" ANSI_COLOR_RESET);
+            }
+        } while (input_status != 1 || y < 0 || y > 9);
+
+
+        // --- Sonu� Hesaplama ve Kontrol ---
+        result = x + y;    //toplama i�lemi girdisi
+        printf("\n" ANSI_COLOR_GREEN "Sonu�: %d + %d = %d \n" ANSI_COLOR_RESET, x, y, result);    //sonu� de�erinin tam say� k�s�tlanmas� i�in girdi
+        if (result > 9) { // Ba�a d�nmek i�in uyar�
+            printf(ANSI_COLOR_RED "result has to be between 0 to 9!\n" ANSI_COLOR_RESET);  
+        }
+
+    } while (result > 9); // Ko�ul girdisi 
+
+    // --- ASCII sonu� ve kontrol  ---
+
+    printf("\n\n" ANSI_COLOR_GREEN ">>> Giris Basarili: Toplam 0-9 Araliginda <<<" ANSI_COLOR_RESET "\n");
+    printf("Ilk Sayi: %d\n", x);
+    printf("Ikinci Sayi: %d\n", y);
+    printf("Toplam (Sonuc): %d\n", result);
+
+    printf("\n--- Rakam Karakterlerinin ASCII Karsiliklari ---\n");
+    printf("Sayi %d'nin ('%c' karakterinin) ASCII Kodu: %d\n", x, (char)(x + '0'), (x + '0')); //ASCII kodlar� X girdisi i�in
+    printf("Sayi %d'nin ('%c' karakterinin) ASCII Kodu: %d\n", y, (char)(y + '0'), (y + '0')); //ASCII kodlar� Y girdisi i�in
+    printf("Sonuc %d'nin ('%c' karakterinin) ASCII Kodu: %d\n", result, (char)(result + '0'), (result + '0')); //ASCII kodlar� sonu� outpotu i�in
+    return 0;
+}
+
+# Project: Projectfinal�dev
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = main.o
+LINKOBJ  = main.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = Projectfinal�dev.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+[Project]
+FileName=Projectfinal�dev.dev
+Name=Projectfinal�dev
+Type=1
+Ver=2
+ObjFiles=
+Includes=
+Libs=
+PrivateResource=
+ResourceIncludes=
+MakeIncludes=
+Compiler=
+CppCompiler=
+Linker=
+IsCpp=0
+Icon=
+ExeOutput=
+ObjectOutput=
+LogOutput=
+LogOutputEnabled=0
+OverrideOutput=0
+OverrideOutputName=
+HostApplication=
+UseCustomMakefile=0
+CustomMakefile=
+CommandLine=
+Folders=
+IncludeVersionInfo=0
+SupportXPThemes=0
+CompilerSet=0
+CompilerSettings=0000000000000000000000000
+UnitCount=1
+
+[VersionInfo]
+Major=1
+Minor=0
+Release=0
+Build=0
+LanguageID=1033
+CharsetID=1252
+CompanyName=
+FileVersion=
+FileDescription=Developed using the Dev-C++ IDE
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=
+AutoIncBuildNr=0
+SyncProduct=1
+
+[Unit1]
+FileName=main.c
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+
+[Editors]
+Order=0
+Focused=0
+[Editor_0]
+CursorCol=1
+CursorRow=52
+TopLine=1
+LeftChar=1
